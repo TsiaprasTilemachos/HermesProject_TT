@@ -116,8 +116,8 @@ lines.append(lobj)
 plt.ylim(-6.1, 6)
 plt.xlim(-6, 6)
 plt.gca().set_aspect('equal', adjustable='box') #corrects the scale of X and Y axis
-plt.xlabel('x')
-plt.title('test')
+plt.xlabel('Ground')
+plt.title('Simulation')
 
 def init():
 	for line in lines:
@@ -146,6 +146,8 @@ def update_line(num):
 
 	return lines
 
-ani = animation.FuncAnimation(fig1, update_line,init_func=init, frames = 99, interval=speed, blit=True)
+ExoAnim = animation.FuncAnimation(fig1, update_line,init_func=init, frames = 99, interval=speed, blit=True)
+#In order to save the animation uncomment this command: ExoAnim.save('ExoSim.mp4')
+ExoAnim.save('ExoSim.mp4')
 
 plt.show()
