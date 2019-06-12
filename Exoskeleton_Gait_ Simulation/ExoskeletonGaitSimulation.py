@@ -19,7 +19,7 @@ hipData = pd.read_excel("Hip.xlsx")
 
 # converting to np.array
 KneeAngle = np.array(kneeData)
-HipAngle = np.array(hipData) -13# -15 for adjustng for the posture of the subject
+HipAngle = np.array(hipData) -15# -15 for adjustng for the posture of the subject
 
 # converting to RAD
 for i in range(KneeAngle.shape[0]):
@@ -94,7 +94,7 @@ for i in range(99):
 
 
 ############ ANIMATION ROUTINES AND DRAWING #############
-speed = 30 # speed of animation's Iteration delay (higher => slower movement)
+speed = int(input("Enter Iteration Delay(higher => slower movement): ")) # speed of animation's Iteration delay (higher => slower movement)
 
 fig1 = plt.figure()
 line, = plt.plot([], [])
