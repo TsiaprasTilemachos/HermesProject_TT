@@ -42,14 +42,13 @@ Pt  = [0,0] #the Toes
 
 #< Matrix used in the update function during the animation>#
 data = np.array([[[float(0)]*4]*2]*99)
-#data_ = np.array([[[float(0)]*4]*2]*99)
 
-dy = [] # express th vertical movement of the whole system due to the foot's 
+dy = [] # express the vertical movement of the whole system(Figure) due to the foot's stiffness
 
 
 ############ POINTS ROUTINES #############
 #< Set of Routines to calculate the points >#
-#<   from the relative angles of the leg   >#
+#<     from the leg's relative angles      >#
 def get_Pk(Lh, Wh):
 	X = m.sin(Wh)*Lh
 	Y = m.cos(Wh)*Lh
@@ -82,17 +81,20 @@ for i in range(99):
 	data[i][0][2],data[i][1][2] = Pa
 	data[i][0][3],data[i][1][3] = Pt
 
+#< Calculating Dy for each frame >#
 for i in range(99):
 	dy.append(get_Dy(data[i][1][2],data[i][1][3],data[(i+50)%99][1][2],data[(i+50)%99][1][3]))
 
+#< Updating the y values of each point >#
 for i in range(99):
 	data[i][0][0],data[i][1][0] = [data[i][0][0],data[i][1][0]-dy[i]]
 	data[i][0][1],data[i][1][1] = [data[i][0][1],data[i][1][1]-dy[i]]
 	data[i][0][2],data[i][1][2] = [data[i][0][2],data[i][1][2]-dy[i]]
 	data[i][0][3],data[i][1][3] = [data[i][0][3],data[i][1][3]-dy[i]]
 
+
 ############ ANIMATION ROUTINES AND DRAWING #############
-speed = 30 # speed of the animation (high = slow)
+speed = 30 # speed of animation's Iteration delay (higher => slower movement)
 
 fig1 = plt.figure()
 line, = plt.plot([], [])
@@ -107,6 +109,7 @@ for index in range(4):
 	lobj = plt.plot([],[],lw=3,color=plotcols[index])[0]
 	lines.append(lobj)
 
+# creating Dot Objects
 lobj = plt.plot([],[],'o', markersize =8,color="black")[0]
 lines.append(lobj)
 
